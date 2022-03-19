@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 500px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "k/AlfonsKemper", "label": "k/AlfonsKemper", "shape": "dot", "size": 10}, {"id": "k/DonaldKossmann", "label": "k/DonaldKossmann", "shape": "dot", "size": 10}, {"id": "31/3455", "label": "31/3455", "shape": "dot", "size": 10}, {"id": "y/JunYang1", "label": "y/JunYang1", "shape": "dot", "size": 10}, {"id": "h/AlonYHalevy", "label": "h/AlonYHalevy", "shape": "dot", "size": 10}, {"id": "s/DanSuciu", "label": "s/DanSuciu", "shape": "dot", "size": 10}, {"id": "t/ValTannen", "label": "t/ValTannen", "shape": "dot", "size": 10}, {"id": "p/LucianPopa", "label": "p/LucianPopa", "shape": "dot", "size": 10}, {"id": "s/AmbujKSingh", "label": "s/AmbujKSingh", "shape": "dot", "size": 10}, {"id": "a/DivyakantAgrawal", "label": "a/DivyakantAgrawal", "shape": "dot", "size": 10}, {"id": "a/AmrElAbbadi", "label": "a/AmrElAbbadi", "shape": "dot", "size": 10}, {"id": "m/CMohan", "label": "m/CMohan", "shape": "dot", "size": 10}, {"id": "a/GustavoAlonso", "label": "a/GustavoAlonso", "shape": "dot", "size": 10}, {"id": "o/BengChinOoi", "label": "o/BengChinOoi", "shape": "dot", "size": 10}, {"id": "b/ElisaBertino", "label": "b/ElisaBertino", "shape": "dot", "size": 10}, {"id": "t/KianLeeTan", "label": "t/KianLeeTan", "shape": "dot", "size": 10}, {"id": "c/CheeYongChan", "label": "c/CheeYongChan", "shape": "dot", "size": 10}, {"id": "f/ElenaFerrari", "label": "f/ElenaFerrari", "shape": "dot", "size": 10}, {"id": "s/PSamarati", "label": "s/PSamarati", "shape": "dot", "size": 10}, {"id": "b/SBressan", "label": "b/SBressan", "shape": "dot", "size": 10}, {"id": "y/JXuYu", "label": "y/JXuYu", "shape": "dot", "size": 10}, {"id": "j/ChristianSJensen", "label": "j/ChristianSJensen", "shape": "dot", "size": 10}, {"id": "d/CEDyreson", "label": "d/CEDyreson", "shape": "dot", "size": 10}, {"id": "b/MichaelHBohlen", "label": "b/MichaelHBohlen", "shape": "dot", "size": 10}, {"id": "w/XiaoyangSeanWang", "label": "w/XiaoyangSeanWang", "shape": "dot", "size": 10}, {"id": "g/DimitriosGunopulos", "label": "g/DimitriosGunopulos", "shape": "dot", "size": 10}, {"id": "07/1181", "label": "07/1181", "shape": "dot", "size": 10}, {"id": "p/DimitrisPapadias", "label": "p/DimitrisPapadias", "shape": "dot", "size": 10}, {"id": "t/YannisTheodoridis", "label": "t/YannisTheodoridis", "shape": "dot", "size": 10}, {"id": "s/TimosKSellis", "label": "s/TimosKSellis", "shape": "dot", "size": 10}, {"id": "s/DiveshSrivastava", "label": "s/DiveshSrivastava", "shape": "dot", "size": 10}, {"id": "r/KARoss", "label": "r/KARoss", "shape": "dot", "size": 10}, {"id": "j/HVJagadish", "label": "j/HVJagadish", "shape": "dot", "size": 10}, {"id": "h/PeterJHaas", "label": "h/PeterJHaas", "shape": "dot", "size": 10}, {"id": "n/JeffreyFNaughton", "label": "n/JeffreyFNaughton", "shape": "dot", "size": 10}, {"id": "g/JohannesGehrke", "label": "g/JohannesGehrke", "shape": "dot", "size": 10}, {"id": "f/MJFranklin", "label": "f/MJFranklin", "shape": "dot", "size": 10}, {"id": "k/FlipKorn", "label": "k/FlipKorn", "shape": "dot", "size": 10}, {"id": "m/TovaMilo", "label": "m/TovaMilo", "shape": "dot", "size": 10}, {"id": "s/SSudarshan1", "label": "s/SSudarshan1", "shape": "dot", "size": 10}, {"id": "49/6363", "label": "49/6363", "shape": "dot", "size": 10}, {"id": "64/146", "label": "64/146", "shape": "dot", "size": 10}, {"id": "w/GerhardWeikum", "label": "w/GerhardWeikum", "shape": "dot", "size": 10}, {"id": "c/SurajitChaudhuri", "label": "c/SurajitChaudhuri", "shape": "dot", "size": 10}, {"id": "n/VivekRNarasayya", "label": "n/VivekRNarasayya", "shape": "dot", "size": 10}, {"id": "c/VassilisChristophides", "label": "c/VassilisChristophides", "shape": "dot", "size": 10}, {"id": "k/HenryFKorth", "label": "k/HenryFKorth", "shape": "dot", "size": 10}, {"id": "m/SharadMehrotra", "label": "m/SharadMehrotra", "shape": "dot", "size": 10}, {"id": "s/IonStoica", "label": "s/IonStoica", "shape": "dot", "size": 10}, {"id": "74/6086", "label": "74/6086", "shape": "dot", "size": 10}, {"id": "k/KKarlapalem", "label": "k/KKarlapalem", "shape": "dot", "size": 10}, {"id": "181/2689-1", "label": "181/2689-1", "shape": "dot", "size": 10}, {"id": "r/LouiqaRaschid", "label": "r/LouiqaRaschid", "shape": "dot", "size": 10}, {"id": "b/PBonnet", "label": "b/PBonnet", "shape": "dot", "size": 10}, {"id": "a/PAtzeni", "label": "a/PAtzeni", "shape": "dot", "size": 10}, {"id": "m/PaoloMerialdo", "label": "m/PaoloMerialdo", "shape": "dot", "size": 10}, {"id": "t/RiccardoTorlone", "label": "t/RiccardoTorlone", "shape": "dot", "size": 10}, {"id": "79/1490", "label": "79/1490", "shape": "dot", "size": 10}, {"id": "g/SGhandeharizadeh", "label": "g/SGhandeharizadeh", "shape": "dot", "size": 10}, {"id": "v/VVassalos", "label": "v/VVassalos", "shape": "dot", "size": 10}, {"id": "p/YPapakonstantinou", "label": "p/YPapakonstantinou", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "k/AlfonsKemper", "to": "k/DonaldKossmann", "weight": 1}, {"from": "k/DonaldKossmann", "to": "31/3455", "weight": 1}, {"from": "k/DonaldKossmann", "to": "y/JunYang1", "weight": 1}, {"from": "h/AlonYHalevy", "to": "s/DanSuciu", "weight": 1}, {"from": "s/DanSuciu", "to": "t/ValTannen", "weight": 1}, {"from": "s/DanSuciu", "to": "p/LucianPopa", "weight": 1}, {"from": "s/AmbujKSingh", "to": "a/DivyakantAgrawal", "weight": 1}, {"from": "s/AmbujKSingh", "to": "a/AmrElAbbadi", "weight": 1}, {"from": "a/DivyakantAgrawal", "to": "a/AmrElAbbadi", "weight": 1}, {"from": "a/DivyakantAgrawal", "to": "m/CMohan", "weight": 1}, {"from": "a/DivyakantAgrawal", "to": "a/GustavoAlonso", "weight": 1}, {"from": "a/AmrElAbbadi", "to": "a/GustavoAlonso", "weight": 1}, {"from": "a/AmrElAbbadi", "to": "m/CMohan", "weight": 1}, {"from": "a/GustavoAlonso", "to": "m/CMohan", "weight": 1}, {"from": "o/BengChinOoi", "to": "b/ElisaBertino", "weight": 1}, {"from": "o/BengChinOoi", "to": "t/KianLeeTan", "weight": 1}, {"from": "o/BengChinOoi", "to": "c/CheeYongChan", "weight": 1}, {"from": "b/ElisaBertino", "to": "f/ElenaFerrari", "weight": 1}, {"from": "b/ElisaBertino", "to": "t/KianLeeTan", "weight": 1}, {"from": "b/ElisaBertino", "to": "s/PSamarati", "weight": 1}, {"from": "b/ElisaBertino", "to": "b/SBressan", "weight": 1}, {"from": "t/KianLeeTan", "to": "y/JXuYu", "weight": 1}, {"from": "j/ChristianSJensen", "to": "d/CEDyreson", "weight": 1}, {"from": "j/ChristianSJensen", "to": "b/MichaelHBohlen", "weight": 1}, {"from": "d/CEDyreson", "to": "b/MichaelHBohlen", "weight": 1}, {"from": "d/CEDyreson", "to": "w/XiaoyangSeanWang", "weight": 1}, {"from": "g/DimitriosGunopulos", "to": "07/1181", "weight": 1}, {"from": "p/DimitrisPapadias", "to": "t/YannisTheodoridis", "weight": 1}, {"from": "t/YannisTheodoridis", "to": "s/TimosKSellis", "weight": 1}, {"from": "s/DiveshSrivastava", "to": "r/KARoss", "weight": 1}, {"from": "r/KARoss", "to": "j/HVJagadish", "weight": 1}, {"from": "r/KARoss", "to": "h/PeterJHaas", "weight": 1}, {"from": "31/3455", "to": "n/JeffreyFNaughton", "weight": 1}, {"from": "31/3455", "to": "g/JohannesGehrke", "weight": 1}, {"from": "31/3455", "to": "f/MJFranklin", "weight": 1}, {"from": "f/ElenaFerrari", "to": "s/PSamarati", "weight": 1}, {"from": "k/FlipKorn", "to": "j/HVJagadish", "weight": 1}, {"from": "j/HVJagadish", "to": "h/PeterJHaas", "weight": 1}, {"from": "j/HVJagadish", "to": "m/TovaMilo", "weight": 1}, {"from": "j/HVJagadish", "to": "s/SSudarshan1", "weight": 1}, {"from": "49/6363", "to": "64/146", "weight": 1}, {"from": "w/GerhardWeikum", "to": "c/SurajitChaudhuri", "weight": 1}, {"from": "c/SurajitChaudhuri", "to": "n/VivekRNarasayya", "weight": 1}, {"from": "m/TovaMilo", "to": "c/VassilisChristophides", "weight": 1}, {"from": "s/SSudarshan1", "to": "k/HenryFKorth", "weight": 1}, {"from": "k/HenryFKorth", "to": "m/SharadMehrotra", "weight": 1}, {"from": "s/IonStoica", "to": "g/JohannesGehrke", "weight": 1}, {"from": "g/JohannesGehrke", "to": "n/JeffreyFNaughton", "weight": 1}, {"from": "74/6086", "to": "c/VassilisChristophides", "weight": 1}, {"from": "k/KKarlapalem", "to": "181/2689-1", "weight": 1}, {"from": "r/LouiqaRaschid", "to": "b/PBonnet", "weight": 1}, {"from": "b/PBonnet", "to": "f/MJFranklin", "weight": 1}, {"from": "a/PAtzeni", "to": "m/PaoloMerialdo", "weight": 1}, {"from": "a/PAtzeni", "to": "t/RiccardoTorlone", "weight": 1}, {"from": "79/1490", "to": "g/SGhandeharizadeh", "weight": 1}, {"from": "v/VVassalos", "to": "p/YPapakonstantinou", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
